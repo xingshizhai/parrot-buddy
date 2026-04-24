@@ -1,0 +1,37 @@
+project_root: d:/Work/esp32/projects/parrot-buddy
+workspace_name: parrot-buddy
+
+device:
+  dut_serial_port: COM6
+  dut_baudrate: 115200
+
+playback:
+  mode: simulate
+  audio_root: d:/Work/esp32/projects/parrot-buddy/test_assets/audio/dev_set
+  labels_file: d:/Work/esp32/projects/parrot-buddy/test_assets/audio/labels.csv
+  output_device: default
+  inter_case_gap_ms: 800
+
+ollama:
+  timeout_sec: 45
+  proposer:
+    base_url: http://192.168.1.88:11434
+    model: qwen2.5:32b-instruct-q4_k_m
+  critic:
+    base_url: http://192.168.1.88:11434
+    model: qwen2.5:32b-instruct-q4_k_m
+
+experiment:
+  max_trials: 20
+  mode: parameter_search
+  strategy: ollama_hybrid
+  enable_code_mutation: false
+  code_mutation_source: ollama
+  seed: 42
+  reports_dir: d:/Work/esp32/projects/parrot-buddy/tools/autotune/reports
+  holdout_ratio: 0.2
+
+build:
+  enabled: false
+  flash_after_build: false
+  dut_flash_port: COM6

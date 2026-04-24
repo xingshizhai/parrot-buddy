@@ -1,0 +1,17 @@
+parameters:
+  PARROT_DETECT_SENSITIVITY:
+    type: int
+    min: 1
+    max: 5
+  PARROT_TRIGGER_HOLD_FRAMES:
+    type: int
+    min: 1
+    max: 8
+  PARROT_MIN_TRIGGER_RMS:
+    type: int
+    min: 400
+    max: 3000
+  PARROT_REPLY_COOLDOWN_MS:
+    type: int
+    min: 300
+    max: 2500

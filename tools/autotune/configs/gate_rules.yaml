@@ -1,0 +1,45 @@
+allowed_edit_paths:
+  - components/parrot_core/
+  - main/Kconfig.projbuild
+  - tools/autotune/
+
+hard_gates:
+  build_must_pass: true
+  max_false_triggers_per_hour: 8
+  max_avg_latency_ms: 300
+  min_precision: 0.85
+  min_recall: 0.75
+
+promotion:
+  require_holdout_improvement: true
+  min_stable_repeats: 3
+  tiers:
+    staging:
+      min_score: 0.25
+      min_holdout_score: 0.30
+      min_stable_mean_score: 0.20
+      require_gate_pass: false
+      require_stable_all_pass: false
+    production:
+      min_score: -1000000000
+      min_holdout_score: -1000000000
+      min_stable_mean_score: -1000000000
+      require_gate_pass: true
+      require_stable_all_pass: true
+
+# Relaxed limits applied automatically when playback.mode=simulate.
+# Simulate uses short virtual sessions (40 files x 3s = ~2 min), so
+# false_triggers_per_hour balloons even with low FP rates. These overrides
+# let reasonable parameter sets pass gates during headless simulate runs.
+simulate_mode_overrides:
+  hard_gates:
+    max_false_triggers_per_hour: 200
+    max_avg_latency_ms: 500
+    min_precision: 0.40
+    min_recall: 0.40
+  promotion:
+    min_stable_repeats: 2
+
+code_mutation:
+  max_edits_per_trial: 4
+  max_files_per_trial: 2

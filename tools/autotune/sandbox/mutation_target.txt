@@ -1,0 +1,3 @@
+# Autotune mutation sandbox target
+# This file is intentionally used by stub code mutation trials.
+MUTATION_TOKEN=0

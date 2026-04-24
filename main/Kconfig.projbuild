@@ -1,0 +1,123 @@
+menu "Parrot Buddy Configuration"
+
+    menu "Parrot Buddy"
+
+        config PARROT_ENABLED
+            bool "Enable Parrot Buddy listener"
+            default y
+
+        config PARROT_DETECT_SENSITIVITY
+            int "Detection sensitivity (1-5, higher = stricter trigger)"
+            range 1 5
+            default 3
+            depends on PARROT_ENABLED
+
+        config PARROT_TRIGGER_HOLD_FRAMES
+            int "Trigger hold frames"
+            range 1 10
+            default 3
+            depends on PARROT_ENABLED
+
+        config PARROT_MIN_TRIGGER_RMS
+            int "Minimum trigger RMS level (0-32767)"
+            range 0 32767
+            default 1200
+            depends on PARROT_ENABLED
+
+        config PARROT_REPLY_COOLDOWN_MS
+            int "Reply cooldown (ms)"
+            range 200 10000
+            default 1200
+            depends on PARROT_ENABLED
+
+        config PARROT_REPLY_VOLUME_PCT
+            int "Reply volume (%)"
+            range 1 100
+            default 75
+            depends on PARROT_ENABLED
+
+    endmenu
+
+    menu "UI Behavior"
+
+        config UI_SCREEN_OFF_TIMEOUT_S
+            int "Screen off timeout in seconds (0 = disabled)"
+            default 30
+
+    endmenu
+
+    menu "Parrot Recording"
+
+        config PARROT_RECORDING_ENABLE
+            bool "Enable parrot sound recording"
+            default y
+            help
+                Enable the parrot sound recording feature with WiFi streaming.
+
+        config PARROT_RECORDING_SILENCE_TIMEOUT_MS
+            int "Silence detection timeout (ms)"
+            default 5000
+            range 1000 30000
+            help
+                Stop recording after this many milliseconds of silence.
+
+        config PARROT_RECORDING_MIN_DURATION_MS
+            int "Minimum recording duration (ms)"
+            default 2000
+            range 500 10000
+            help
+                Minimum length of a recording session.
+
+        config PARROT_RECORDING_SAMPLE_RATE
+            int "Audio sample rate (Hz)"
+            default 16000
+            range 8000 48000
+            help
+                Sample rate for audio recording and streaming.
+
+        config PARROT_RECORDING_DETECTION_THRESHOLD_DB
+            int "Sound detection threshold (dBFS)"
+            default -40
+            range -60 -20
+            help
+                RMS threshold for sound detection (lower = more sensitive).
+
+        config PARROT_RECORDING_BUFFER_SIZE_MS
+            int "Audio buffer size (ms)"
+            default 1000
+            range 100 5000
+            help
+                Size of audio buffer for network fluctuation handling (used in Phase 2).
+
+        config PARROT_RECORDING_WS_PORT
+            int "WebSocket server port"
+            default 8082
+            range 1024 65535
+            help
+                Port for WebSocket audio streaming server (used in Phase 2).
+
+        config PARROT_RECORDING_WS_SERVER
+            string "WebSocket server IP address"
+            default "192.168.1.101"
+            help
+                IP address of the PC running the WebSocket receiver (used in Phase 2).
+
+    endmenu
+
+    menu "WiFi Configuration"
+
+        config PARROT_WIFI_SSID
+            string "WiFi SSID"
+            default "DeepSeek"
+            help
+                WiFi network SSID for streaming connection.
+
+        config PARROT_WIFI_PASSWORD
+            string "WiFi Password"
+            default "Wxxncbdmm1804"
+            help
+                WiFi network password.
+
+    endmenu
+
+endmenu

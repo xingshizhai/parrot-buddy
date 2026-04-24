@@ -1,0 +1,21 @@
+idf_component_register(
+    SRCS
+        "src/board_display.c"
+        "src/board_touch.c"
+        "src/board_button.c"
+        "src/board_imu.c"
+        "src/board_audio.c"
+        "src/board_led.c"
+    INCLUDE_DIRS "include"
+    REQUIRES
+        buddy_hal
+        log
+    PRIV_REQUIRES
+        espressif__esp_lvgl_port
+        espressif__esp_codec_dev
+        espressif__button
+        espressif__i2c_bus
+        espressif__icm42670
+        espressif__esp-box-3
+        espressif__esp_lcd_touch
+)
